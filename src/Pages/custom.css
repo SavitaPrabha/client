@@ -1,0 +1,145 @@
+
+.dashboard{
+    display: flex;
+}
+.dashboard h3{
+    justify-content: center;
+    margin-left: 102px;
+    font-weight: 700;
+    align-items: center;
+    margin-top: 10rem;
+    color: #c6213f;
+}
+.dashboard h2{
+    justify-content: center;
+    margin-left: 102px!important;
+    color: #c6213f;
+    font-weight: 400;
+    font-size: 25px;
+    padding: 20px 0px 20px 0px;
+}
+.dashboard img{
+    height: auto;
+    width: 100%;
+}
+.btn_dashboard{
+    background: transparent;
+    border: 2px solid #c6213f;
+    padding: 10px 20px 10px 20px;
+    text-transform: uppercase;
+    margin-left: 100px;
+    color: #c6213f;
+}
+.btn_admin{
+ background: none;
+ border: none;
+ color: #fff;
+ font-weight: 500;
+ align-items: center;
+}
+.footer{
+    background-color: #c6213f;
+    color: #fff;
+    display:grid;
+  }
+  .footer p{
+     float: right;
+     margin: 20px 20px 0px 200px!important;
+  }
+  .btn-danger {
+    color: #fff;
+     background:none!important;
+     border:none!important;
+     margin: 20px;
+}
+/*================================= DROPDOWN BUTTON======================= */
+.btn_general button{
+    background-color: #c6213f;
+    border: none;
+    border-radius: 8px;
+}
+.btn_general button:hover{
+    background-color: #c6213f;
+}
+.dashboard_admin{
+
+    margin: 2rem 1.5rem 1.8rem 1.5rem;
+}
+ span{
+
+    font-weight: 500;
+    color: rgb(97, 96, 96);
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.dashboard_admin h1{
+    color: #c6213f;
+   font-size: 2rem;
+    font-weight: 600;
+
+}
+.upbtn span{
+    color: #fff;
+}
+/*================================ Sample document============================== */
+.pdf-container{
+    width: 100%;
+    height: 800px;
+    background-color: #e4e4e4;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .error-msg{
+    width: 100%;
+    color: red;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  /* ========================================POP UP =======================================*/
+  .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1pxsolidrgba(0,0,0,.2);
+    border-radius: 0.3rem;
+    outline: 0;
+    margin-left: -66px;
+  }
+  .login-form {
+    background-color: white;
+    padding: 2rem;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    z-index: 1!important;
+}
+.card-body{
+background-color: #f2e9e9;
+    color: #dd1338;
+    text-align: center;
+    margin: 20px;
+    font-weight: 500;
+}
+/*====================== pdf======================== */
+.pdflogo{
+    height: auto;
+    margin-left: 100px;
+}
+.pdf-container {
+    width: 100%;
+    height: auto;
+    background-color: #e4e4e4;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.genral{
+    color: red;
+    text-align: center;
+}
