@@ -1,64 +1,107 @@
 import axios from 'axios';
-import React, { useRef, useState } from 'react'
-import { toast, ToastContainer } from 'react-toastify';
-import {Link} from 'react-router-dom';
-import SendOtp from './SendOtp';
+import React, { useRef, useState, useEffect } from 'react'
+import swal from "sweetalert2";
+import store from "store";
+import { Form, FormGroup, Input, Label, Button, } from 'reactstrap';
+import { postSubmitForm } from "../../FormHelper/Forms_helper"
+import { useNavigate } from 'react-router-dom';
 function Otp() {
-    const emailRef = useRef();
-    const [otpForm, showForm] = useState(true)
-    const sendOtp =async () =>{
-        try{
-            let url = "https://pqs3b4u48k.execute-api.ap-south-1.amazonaws.com/prod/students/checkemail"
-            let option ={
-                method:"POST",
-                url:url,
-                data:{email:emailRef.current.value}
-            }
-         
-        let response = await axios(option)
-        let record = response.data;
-        if(record.statusText == 'Success'){
-            toast.success("record.message");
-           showForm(false);
-        }else{
-            toast.error(record.message);
+    useEffect(() => {
+        setUser(store.get("user1") ? store.get("user1") : null);
+    }, []);
+    const navigate = useNavigate()
+    const [user, setUser] = useState(null);
+    const [email, setemail] = useState()
+    const [password, setpassword] = useState()
+
+    const handleValidSubmit = async (e, v) => {
+        e.preventDefault()
+        let object = {
+            email: email,
+            pwd: password,
         }
-        
-    } 
-    catch(e){
-        toast.error('something went wrong!');
+        console.log(object);
+        let url = "https://pqs3b4u48k.execute-api.ap-south-1.amazonaws.com/prod/students/login";
+        const response = await postSubmitForm(url, object);
+
+        if (response && response.status === 1) {
+            showNotification(response.message, "Success");
+            navigate("/UserDashboard")
+            console.log(response);
+            store.set("user1", response.data);
+            setUser(store.get("user1") ? store.get("user1") : null);
+            window.location.reload();
+
+        } else {
+            showNotification(response.message, "Error");
+        }
+
+    };
+    function showNotification(message, type) {
+        if (type === "Success") swal.fire(type, message, "success");
+        else swal.fire(type, message, "error");
     }
-    }
-  return (
-    <div className='container abc'>
-        <div className='row login'>
-            <div className='col-md-2' >
+    return (
+
+
+        <Form className="form" onSubmit={(e) => handleValidSubmit(e)}>
+            <div className='form-inner'>
+
+                <FormGroup className='form-group'>
+                    <Label for="Email">Email</Label>
+                    <Input
+                        name="email"
+                        label="email"
+                        placeholder="Enter email"
+                        type="email"
+                        onChange={(e, v) => {
+                            setemail(e.target.value);
+                        }}
+                        errorMessage="Email cannot be empty."
+
+                    />
+                </FormGroup>
+                <FormGroup className='form-group'>
+                    <Label for="Password" className>Password</Label>
+                    <Input
+                        name="pwd"
+                        label="Password"
+                        placeholder="Enter Password"
+                        type="text"
+                        errorMessage="Password cannot be empty."
+                        onChange={(e, v) => {
+                            setpassword(e.target.value);
+                        }}
+                        validate={{
+                            required: { value: true },
+                            pattern: {
+                                value: "^[0-9a-zA-Z]+$",
+                                errorMessage: (
+                                    "Cannot use space/special characters."
+                                ),
+                            },
+                        }}
+                    />
+                </FormGroup>
+                <Button
+                    type="submit"
+                    color="primary"
+                    className="mr-1"
+                >
+                    Submit
+                </Button>
             </div>
-            <div className='col-md-6'>
-                  {/* <ToastContainer/>  */}
-                <h3 className=''></h3><br/>
-                {otpForm ? <form autoComplete='off' id='otpForm' method='post'>
-                <div className='mb-3'>
-                    <label className='form-label'>Email</label>
-                    <input type='email'
-                    className='form-control'
-                    name="email"
-                    ref={emailRef}
-                    autoComplete="off"/>
-                </div>
-                <div>
-                
-                <a href='/SendOtp'> <button type='button' className='btn btn-primary' onClick={sendOtp}>Login</button><br/></a>
-                    <a href='/UserLogin'>Register here</a>
-                    </div>
-                    </form>
-                    :<h1>hey</h1>
-                    }
-               
+
+            <div>
+
+
+                <a href='/UserLogin'>Register here</a>
             </div>
-        </div>
-    </div>
-  )
+        </Form>
+
+
+
+    )
 }
 
 export default Otp;

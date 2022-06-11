@@ -2,16 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { NavLink } from "reactstrap";
+import store from "store";
+import swal from "sweetalert2";
+import { postSubmitForm } from "../FormHelper/Forms_helper"
+import { useNavigate } from 'react-router-dom';
 import LoginRegisterPage from "../Pages/FORMS/LoginRegisterPage";
 import "./header.css";
 import UserLogin from "./UserLogin";
 function Header() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
-
+  const navigate = useNavigate()
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-
+  const [user, setUser] = useState(null);
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
@@ -19,11 +23,30 @@ function Header() {
       setButton(true);
     }
   };
+  useEffect(() => {
+    setUser(store.get("user1") ? store.get("user1") : null);
+  }, []);
 
   useEffect(() => {
     showButton();
   }, []);
 
+  const handleLogout = async (e, v) => {
+    let url = "https://pqs3b4u48k.execute-api.ap-south-1.amazonaws.com/prod/students/logout";
+    const response = await postSubmitForm(url, null);
+    if (response && response.status === 1) {
+      store.clearAll();
+      navigate("/")
+      window.location.reload();
+    } else {
+      showNotification(response.message, "Error");
+    }
+
+  };
+  function showNotification(message, type) {
+    if (type === "Success") swal.fire(type, message, "success");
+    else swal.fire(type, message, "error");
+  }
   window.addEventListener("resize", showButton);
   return (
     <Row>
@@ -85,9 +108,21 @@ function Header() {
           </ul>
         </Col>
         <Col md={4}>
-          {" "}
-           <Button className="btn_style">
-           <LoginRegisterPage/></Button>
+
+          {user ? "Welcome" :
+            ""
+          }&nbsp; &nbsp;
+          {user ? user.first_name :
+            <Button className="btn_style">
+              <LoginRegisterPage /></Button>
+          }
+          &nbsp; &nbsp;
+          {
+            user && user ?
+              <Button color="success" onClick={() => { handleLogout() }} >Logout</Button> : ""
+
+          }
+
         </Col>
       </div>
     </Row>
