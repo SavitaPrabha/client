@@ -14,12 +14,15 @@
       margin-left: 200px;
       font-weight: 500;
   }
+  .logo{
+    color: #fff;
+    font-size: 1rem;
+    align-items: center;
+  }
   .navbar-container span{
     color: #fff;
   }
-
-
-  .row {
+.row {
     --bs-gutter-x: 0rem !important;
     --bs-gutter-y: 0;
     display: flex;
@@ -27,7 +30,7 @@
     margin-top: calc(-1 * var(--bs-gutter-y));
     margin-right: calc(-.5 * var(--bs-gutter-x));
     margin-left: calc(-.5 * var(--bs-gutter-x));
-}
+} 
   a{
     text-decoration: none!important;
   }
@@ -42,11 +45,19 @@
     text-align: center;
     margin-top: 20px;
     width: 60%;
-    margin-left: -148px;
-    /* height: 127vh!important; */
+  
  }
   .nav-item {
     color:rgb(82, 8, 8);
+  }
+  .modal-header{
+background-color: #dc3545;
+  }
+  .modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    color: #fff;
+    font-weight: 700;
   }
   .nav-links {
     display: block;
@@ -72,7 +83,7 @@
     color: #fff!important;
     font-weight: 500;
   }
-  
+
   .nav-links:hover {
     color:#fff;
     opacity: 0.9;
@@ -88,6 +99,63 @@
     display: none;
     position: absolute;
   }
+  .nav-menu.active {
+    background: #242222;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+  }
+
+  .nav-links {
+    text-align: center;
+    display: table;
+    
+  }
+  .nav-links:hover {
+    background-color: #fff;
+    color: #242424;
+    border-radius: 0;
+  }
+
+  .navbar-logo {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    transform: translate(25%, 50%);
+  }
+
+  .menu-icon {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 60%);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  .nav-links-mobile {
+    display: block;
+    text-align: center;
+    margin: 1rem auto;
+    border-radius: 4px;
+    width: 80%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    background-color: transparent;
+    color: #fff;
+    padding: 14px 20px;
+    border: 1px solid #fff;
+    transition: all 0.3s ease-out;
+  }
+
+  .nav-links-mobile:hover {
+    background: #fff;
+    color: #242424;
+    transition: 250ms;
+  }
+
   [class*="col-"] {
     width: 100%;
   }
@@ -95,89 +163,19 @@
     .NavbarItems {
       position: relative;
     }
-  
+  }
+
+  @media screen and (max-width: 600px) {
     .nav-menu {
-      display: flex;
-      flex-direction: column;
-      height: 90vh;
-      position: absolute;
-      top: 30px;
-      opacity: 1;
-      transition: all 0.5s ease;
-      background: #c6213f;
-      width: 100%;
+      display: none;
     }
-    .nav-menu.active {
-      background: #242222;
-      left: 0;
-      opacity: 1;
-      transition: all 0.5s ease;
-      z-index: 1;
-    }
+
   
-    .nav-links {
-      text-align: center;
-      display: table;
-      
-    }
-  
-    .nav-links:hover {
-      background-color: #fff;
-      color: #242424;
-      border-radius: 0;
-    }
-  
-    .navbar-logo {
-      position: absolute;
-      top: 0;
-      text-align: center;
-      transform: translate(25%, 50%);
-    }
-  
-    .menu-icon {
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform: translate(-100%, 60%);
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-  
-    .nav-links-mobile {
-      display: block;
-      text-align: center;
-      margin: 1rem auto;
-      border-radius: 4px;
-      width: 80%;
-      text-decoration: none;
-      font-size: 1.5rem;
-      background-color: transparent;
-      color: #fff;
-      padding: 14px 20px;
-      border: 1px solid #fff;
-      transition: all 0.3s ease-out;
-    }
-  
-    .nav-links-mobile:hover {
-      background: #fff;
-      color: #242424;
-      transition: 250ms;
-    }
   }
   
-  /*============================ RESPONSIVE CSS ========================*/
-  /* For mobile phones: */
-[class*="col-"] {
-  width: 100%;
-}
 
-@media only screen and (min-width: 768px) {
-  .login-form {
-    background-color: white;
-    padding: 2rem;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-    z-index: 1!important;
+
+
+  
+  
    
-}
-}

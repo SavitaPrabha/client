@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { postSubmitForm } from "../FormHelper/Forms_helper"
 import swal from "sweetalert2";
 import store from "store";
+import './header.css';
 import LoginForm from './LoginForm';
 function Popup() {
   //const token = store.get("user") ? store.get("user").user : "";
@@ -30,15 +31,16 @@ function Popup() {
 
 
   const handleLogout = async (e, v) => {
-    let url = "https://pqs3b4u48k.execute-api.ap-south-1.amazonaws.com/prod/adminusers/logout";
-    const response = await postSubmitForm(url, null);
-    if (response && response.status === 1) {
-      store.clearAll();
-      navigate("/")
-      window.location.reload();
-    } else {
-      showNotification(response.message, "Error");
-    }
+  //  let url = "https://pqs3b4u48k.execute-api.ap-south-1.amazonaws.com/prod/adminusers/logout";
+   // const response = await postSubmitForm(url, null);
+    // if (response && response.status === 1) {
+     
+    // } else {
+    //   showNotification(response.message, "Error");
+    // }
+    store.clearAll();
+    navigate("/")
+    window.location.reload();
 
   };
   function showNotification(message, type) {
@@ -59,14 +61,10 @@ function Popup() {
   return (
     <div>
 
-      <Button color="danger"
-        onClick={toggle}>{admin ? admin.username
-
-
-          : "Admin Login"}</Button>
+      <Button color="danger" onClick={toggle}>{admin ? admin.username : "Admin Login"}</Button>
       {
         admin && admin ?
-          <Button color="success" onClick={() => { handleLogout() }} >Logout</Button> : ""
+          <Button className='logout_btn' onClick={() => {handleLogout()}}>Logout</Button> : ""
 
       }
 
@@ -77,18 +75,7 @@ function Popup() {
         <ModalBody>
           <LoginForm Login={Login} error={error} />
         </ModalBody>
-        <ModalFooter>
-
-          {/* {(admin && admin.username != "") ? (
-            <div className="welcome">
-              <h2>welcome<span>{admin && admin.username}</span></h2>
-              <button className="btn" onClick={Logout}>Logout</button>
-            </div>
-          ) : (
-            ""
-          )} * */}
-          {/* <Button color="primary" onClick={toggle}>Okay</Button> */}
-        </ModalFooter>
+        
       </Modal>
     </div>
   );

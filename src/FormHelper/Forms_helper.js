@@ -1,7 +1,10 @@
 import axios from "axios";
+import store from "store";
+
 // Submit Form
 const postSubmitForm = (url, data) => {
-  const token = localStorage.getItem("userToken");
+  const token = store.get("user1") ? store.get("user1").token : "";
+
   const config = {
     headers: { Authorization: token },
   };
@@ -21,8 +24,7 @@ const postSubmitForm = (url, data) => {
             message = "Sorry! the page you are looking for could not be found";
             break;
           case 500:
-            message =
-              "Sorry! something went wrong, please contact our support team";
+            message = "Sorry! something went wrong, please contact our support team";
             break;
           case 401:
             message = "Invalid credentials";
@@ -36,6 +38,7 @@ const postSubmitForm = (url, data) => {
     });
 };
 export { postSubmitForm };
+
 // Submit Form Without Auth
 const postSubmitFormNoAuth = (url, data) => {
   return axios
@@ -53,8 +56,7 @@ const postSubmitFormNoAuth = (url, data) => {
             message = "Sorry! the page you are looking for could not be found";
             break;
           case 500:
-            message =
-              "Sorry! something went wrong, please contact our support team";
+            message = "Sorry! something went wrong, please contact our support team";
             break;
           case 401:
             message = "Invalid credentials";
@@ -68,10 +70,12 @@ const postSubmitFormNoAuth = (url, data) => {
     });
 };
 export { postSubmitFormNoAuth };
+
 // Submit Form with form-data
 const postSubmitForm_withformdata = (url, data) => {
-  console.log(data);
-  const token = localStorage.getItem("userToken");
+  //console.log(data);
+
+  const token = store.get("user1") ? store.get("user1").token : "";
   const config = {
     headers: { Authorization: token },
   };
@@ -105,3 +109,10 @@ const postSubmitForm_withformdata = (url, data) => {
     });
 };
 export { postSubmitForm_withformdata };
+
+const getGeoInfo = async () => {
+  let response = await axios.get("https://ipapi.co/json/");
+  return response.data;
+};
+
+export { getGeoInfo };

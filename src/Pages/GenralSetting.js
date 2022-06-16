@@ -23,7 +23,7 @@ class GenralSetting extends React.Component {
   render() {
     return (
       <div>
-        <Button color='success' onClick={this.toggle}>Genral Sample</Button>
+        <Button onClick={this.toggle}>General Sample</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}> <h5 className='genral'>Upload General Sample Document</h5></ModalHeader>
           <ModalBody>

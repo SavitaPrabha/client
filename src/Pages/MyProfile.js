@@ -4,15 +4,15 @@ import csc from "country-state-city";
 import { Col, Button } from "react-bootstrap";
 import { Row } from "reactstrap";
 import { Link } from "react-router-dom";
-import "./UserLogin.css";
 import { useNavigate } from 'react-router-dom';
 import store from "store";
 import swal from "sweetalert2";
-import './header.css';
 import { postSubmitForm, postSubmitFormNoAuth } from "../FormHelper/Forms_helper"
-const UserLogin = () => {
 
-  const [user, setUser] = useState(null);
+
+function MyProfile() {
+  // const [edit, setEdit] = useState(false)
+
   const [email, setemail] = useState();
   const [firstName, setfirstName] = useState();
   const [lastName, setlastName] = useState();
@@ -21,20 +21,35 @@ const UserLogin = () => {
   const [designation, setdesignation] = useState();
   const [institute, setinstitute] = useState();
   const [mobile, setmobile] = useState();
+  const [user, setUser] = useState(null);
+  const [isLoginOTP, setIsLoginOTP] = useState();
   const [country, setCountry] = useState();
   const [allCountries, setAllCountries] = useState();
   const [countryCode, setCountryCode] = useState();
   const [highestDegree, sethighestDegree] = useState();
-  const [isLoginOTP, setIsLoginOTP] = useState();
-  const [referralCode, setReferralCode] = useState();
-
-  const navigate = useNavigate()
-
+  console.log("D", user);
+  useEffect(() => {
+    setUser(store.get("user1") ? store.get("user1") : null);
+  }, []);
   useEffect(() => {
     setAllCountries(csc.getAllCountries());
+    if (user) {
 
-  }, []);
+      setdegree(user.degree)
+      setemail(user.email)
+      setfirstName(user.first_name)
+      setlastName(user.last_name)
+      // setpwd(user.pwd)
+      setdesignation(user.designation)
+      setinstitute(user.institute)
+      setmobile(user.mobile)
+      setCountry(user.country)
+      // setCountryCode(user.country_code)
+      sethighestDegree(user.highest_degree)
+    }
+  }, [user]);
 
+  const navigate = useNavigate()
   const handleValidSubmit = async (e, v) => {
     e.preventDefault()
     let object = {
@@ -42,28 +57,26 @@ const UserLogin = () => {
       first_name: firstName,
       last_name: lastName,
       email: email,
-      pwd: pwd,
+    //   pwd: pwd,
       degree: degree,
       highest_degree: highestDegree,
       designation: designation,
       institute: institute,
       mobile: mobile,
       country: country,
-      country_code: countryCode,
-      referral_code: referralCode
+      // country_code: countryCode
+
 
     }
     console.log(object);
-    let url = "https://pqs3b4u48k.execute-api.ap-south-1.amazonaws.com/prod/students/register";
+    let url = "https://pqs3b4u48k.execute-api.ap-south-1.amazonaws.com/prod/students/update";
     const response = await postSubmitForm(url, object);
 
     if (response && response.status === 1) {
       showNotification(response.message, "Success");
-      navigate("/UserDashboard")
-      console.log(response);
-
       store.set("user1", response.data);
       setUser(store.get("user1") ? store.get("user1") : null);
+      console.log(response);
       window.location.reload();
 
     } else {
@@ -76,24 +89,20 @@ const UserLogin = () => {
     if (type === "Success") swal.fire(type, message, "success");
     else swal.fire(type, message, "error");
   }
-  const handleSentOtp = async (e, v) => {
 
+  const handleSentOtp = async (e, v) => {
     setemail(email);
     let url = "https://pqs3b4u48k.execute-api.ap-south-1.amazonaws.com/prod/students/checkemail";
     const response = await postSubmitFormNoAuth(url, {
-
       email: email,
 
     });
-
-
-
     console.log(email);
     if (response && response.status === 1) {
       console.log(response);
 
       setIsLoginOTP(response.data.otp);
-        
+
 
     } else {
       showNotification(response.message, "Error");
@@ -101,11 +110,14 @@ const UserLogin = () => {
 
   };
 
+  // const updateUser = () => {
 
+  //   setEdit(false)
+  // }
   return (
-    <>
+    <div>
       <div className="container multiple_inputs">
-        <h1>Registration</h1>
+        <h1>Profile</h1>
         <form action="" onSubmit={(e) => handleValidSubmit(e)}>
           <Row>
             <Col md={6}>
@@ -118,6 +130,7 @@ const UserLogin = () => {
                       setemail(e.target.value);
                     }}
 
+                    value={email}
                     autoComplete="off"
                     name="email"
                     id="email"
@@ -126,13 +139,14 @@ const UserLogin = () => {
               </span>
             </Col>
             <Col md={2}>
-              <button className="otp_btn"
+              <span className="otp_btn"
                 type="submit"
-                onClick={(e) => handleSentOtp(e)}>Sent OTP</button>
+                onClick={(e) => handleSentOtp(e)}>Sent OTP</span>
               <span>
                 <div>
                   <input
                     type="otp"
+                    value={isLoginOTP}
                     autoComplete="off"
                     name="otp"
                     id="otp"
@@ -141,10 +155,7 @@ const UserLogin = () => {
               </span>
             </Col>
             <Col md={4}>
-
             </Col>
-
-
             <Row>
               <Col md={6}>
                 <span>
@@ -155,9 +166,10 @@ const UserLogin = () => {
                       onChange={(e, v) => {
                         setfirstName(e.target.value);
                       }}
+                      value={firstName}
                       autoComplete="off"
                       name="firstName"
-                      id="firstName"
+
                     />
                   </div>
                 </span>
@@ -172,6 +184,7 @@ const UserLogin = () => {
                         setlastName(e.target.value);
                       }}
                       autoComplete="off"
+                      value={lastName}
                       name="lastname"
                       id="lastname"
                     />
@@ -190,6 +203,7 @@ const UserLogin = () => {
                         setdesignation(e.target.value);
                       }}
                       autoComplete="off"
+                      value={designation}
                       name="designation"
                       id="designation"
                     />
@@ -205,6 +219,7 @@ const UserLogin = () => {
                       onChange={(e, v) => {
                         setmobile(e.target.value);
                       }}
+                      value={mobile}
                       autoComplete="off"
                       name="mobile"
                       id="mobile"
@@ -222,7 +237,9 @@ const UserLogin = () => {
                       type="text"
                       onChange={(e, v) => {
                         setdegree(e.target.value);
+                        console.log(e.target.value)
                       }}
+                      value={degree}
                       autoComplete="off"
                       name="degree"
                       id="degree"
@@ -239,6 +256,7 @@ const UserLogin = () => {
                       onChange={(e, v) => {
                         sethighestDegree(e.target.value);
                       }}
+                      value={highestDegree}
                       autoComplete="off"
                       name="highest_degree"
                       id="highest_degree"
@@ -246,18 +264,20 @@ const UserLogin = () => {
                   </div>
                 </span>
               </Col>
-            </Row>
 
+            </Row>
             <Row>
-            <Col md={6}>
+              <Col md={6}>
                 <span>
                   <div>
                     <label htmlFor="Institute">Institute</label>
                     <input
-                      type="institute"
+                      type="text"
+
                       onChange={(e, v) => {
                         setinstitute(e.target.value);
                       }}
+                      value={institute}
                       autoComplete="off"
                       name="institute"
                       id="institute"
@@ -265,43 +285,17 @@ const UserLogin = () => {
                   </div>
                 </span>
               </Col>
-              <Col md={6}>
-                <span>
-                  <div>
-                    <label htmlFor="referralcode">Referral Code</label>
-                    <input
-                      type="text"
-                      onChange={(e, v) => {
-                        setReferralCode(e.target.value);
-                      }}
-                      autoComplete="off"
-                      name="referral_code"
-                      id="referral_code"
-                    />
-                  </div>
-                </span>
-              </Col>
-            </Row>
-
-
-
-
-
-
-
-
-
-
-            <Row>
-              <Col md={6}>
+              <Col md={6} className="mt-5">
                 <span>
                   {" "}
                   <div>
                     <label htmlFor="country">Country</label>
-                    <select className="countrynm"
-                        onChange={(e, v) => {
+                    <select
+                      onChange={(e, v) => {
                         setCountry(e.target.value);
-                      }}>
+                      }}
+                      value={country}
+                    >
                       <option value="">
                         -- Select Country --
                       </option>
@@ -316,15 +310,18 @@ const UserLogin = () => {
                   </div>
                 </span>
               </Col>
-              <Col md={6}>
+              {/* <Col md={6}>
                 <span>
                   <div>
                     <label htmlFor="country_code">Country Code</label>
                     <input
                       type="number"
-                        onChange={(e, v) => {
-                        setCountryCode(e.target.value);
-                      }}
+
+                      // onChange={(e, v) => {
+                      //   setCountryCode(e.target.value);
+                      // }}
+
+                      // value={countryCode}
                       autoComplete="off"
                       name="country_code"
                       id="country_code"
@@ -332,9 +329,10 @@ const UserLogin = () => {
                     />
                   </div>
                 </span>
-              </Col>
+              </Col> */}
+
             </Row>
-            <Row>
+            {/* <Row>
               <Col md={6}>
                 <span>
                   {" "}
@@ -345,6 +343,7 @@ const UserLogin = () => {
                       onChange={(e, v) => {
                         setpwd(e.target.value);
                       }}
+
                       autoComplete="off"
                       name="pwd"
                       id="password"
@@ -369,22 +368,29 @@ const UserLogin = () => {
                   </div>
                 </span>
               </Col>
-            </Row>
-
+            </Row> */}
           </Row>
           <button type="submit" className="register_btn">
-            REGISTER
+            Update
           </button>
+          {/* {edit ? (<button onClick={() => updateUser()}>Save</button>) : (<button onClick={() => { setEdit(true) }}>Edit</button>)} */}
         </form>
       </div>
       <div>
 
       </div>
-      <p className="login_button">
-        Already Registered?<Link to="/LoginRegisterPage">Login</Link>
-      </p>
-    </>
-  );
-};
 
-export default UserLogin;
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      
+    </div>
+    
+
+  
+  )
+}
+
+export default MyProfile;

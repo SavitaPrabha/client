@@ -40,7 +40,7 @@ class ConfigureDelayed extends React.Component {
           <ModalHeader toggle={this.toggle}>{`Activate/Deactivate delayed`}</ModalHeader>
           <ModalBody>
           <Row>
-            <Col md={4}>
+            <Col md={2}>
             <label className="switch">
              <></>
              <span class="slider"></span>
@@ -52,16 +52,16 @@ class ConfigureDelayed extends React.Component {
            </div>
            
           </Col>
-          <Col md={4}>
+          <Col md={5}>
           <label for="date">Date until deactive</label>
               <input type="date" class="form-control"
                 id="date"
                 min=""
                 disabled="disabled"
               />
-              
+             
           </Col>
-          <Col md={4}>
+          <Col md={5}>
           <label>Time until deactive</label>
           <input type="time"
           class="form-control"

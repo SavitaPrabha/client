@@ -1,4 +1,6 @@
-
+body{
+    min-height: 100vh;
+}
 .dashboard{
     display: flex;
 }
@@ -10,9 +12,29 @@
     margin-top: 10rem;
     color: #c6213f;
 }
+
+
+@media screen and (max-width: 600px) {
+ 
+  .dashboard h3{
+    justify-content: center;
+    margin-left: 30px;
+    font-weight: 700;
+    align-items: center;
+    margin-top: 0rem;
+    color: #c6213f;
+}
+}
+
+
+
+
+
+
+
 .dashboard h2{
     justify-content: center;
-    margin-left: 102px!important;
+    margin-left: 98px!important;
     color: #c6213f;
     font-weight: 400;
     font-size: 25px;
@@ -27,7 +49,7 @@
     border: 2px solid #c6213f;
     padding: 10px 20px 10px 20px;
     text-transform: uppercase;
-    margin-left: 100px;
+    margin-left: 98px;
     color: #c6213f;
 }
 .btn_admin{
@@ -37,15 +59,7 @@
  font-weight: 500;
  align-items: center;
 }
-.footer{
-    background-color: #c6213f;
-    color: #fff;
-    display:grid;
-  }
-  .footer p{
-     float: right;
-     margin: 20px 20px 0px 200px!important;
-  }
+
   .btn-danger {
     color: #fff;
      background:none!important;
@@ -53,6 +67,7 @@
      margin: 20px;
 }
 /*================================= DROPDOWN BUTTON======================= */
+
 .btn_general button{
     background-color: #c6213f;
     border: none;
@@ -98,6 +113,7 @@
     font-size: 14px;
     font-weight: 600;
   }
+
   /* ========================================POP UP =======================================*/
   .modal-content {
     position: relative;
@@ -119,11 +135,11 @@
     z-index: 1!important;
 }
 .card-body{
-background-color: #f2e9e9;
+   background-color: #f2e9e9;
     color: #dd1338;
     text-align: center;
-    margin: 20px;
-    font-weight: 500;
+    margin: 2px;
+    padding: 20px!important;
 }
 /*====================== pdf======================== */
 .pdflogo{
@@ -142,4 +158,55 @@ background-color: #f2e9e9;
 .genral{
     color: red;
     text-align: center;
+}
+/*========================================== Buttons================================ */
+.btn-secondary {
+    color: #fff; 
+    background-color: #dc3545!important; 
+    border-color: #dc3545!important; 
+}
+.btn_admin{
+   text-align: center;
+}
+.btn_dashboard{
+    border-radius: 8px;
+    background: #dc3545;
+    color: #fff;
+}
+.btn_dashboard:hover{
+    color: #fff;
+}
+
+select {
+    word-wrap: normal;
+    width: 100%;
+    border: none;
+    padding: 8px;
+    border: 1px solid #dadada;
+    border-radius: 8px;
+    margin-top: 10px !important;
+}
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #dc3545;
+    color: white;
+  }
+  .footer p{
+    margin-top: 30px;
+    margin-left: 80px;
+  }
+  @media screen and (max-width: 600px)
+{
+
+.dashboard h2 {
+  margin-left: 46px !important;
+  color: #c6213f !important;
+  font-weight: 400 !important;
+  font-size: 22px !important;
+  padding: 20px 10px 20px 0px !important;
+}
+
 }

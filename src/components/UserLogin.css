@@ -137,3 +137,40 @@ form input {
     padding: 20px;
     text-align: center;
 }
+.multiple_inputs h1{
+  color: crimson;
+  font-weight: 700;
+  margin-top: 20px;
+  padding-bottom: 30px;
+}
+.multiple_inputs label{
+  margin-left: 15px;
+  padding: 10px;
+  color: crimson;
+}
+.register_btn{
+  background-color:crimson;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px 10px 20px;
+  margin-top: 1rem;
+  font-weight: 600;
+  
+}
+.otp_btn{
+  
+    color: white;
+    margin-left: 15px;
+    padding: 10px 20px 10px 20px;
+    background-color: #dc3545;
+    border: none;
+}
+.countrynm{
+
+width: 100%;
+    border: none;
+    padding: 8px;
+    border: 1px solid #dadada;
+    border-radius: 8px;
+}

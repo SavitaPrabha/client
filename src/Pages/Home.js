@@ -11,8 +11,8 @@ function Home() {
   return (
     <Row>
       <div className='dashboard'>
-        <Col md={6}><img src='images/imgtex.png' /></Col>
-        <Col md={6}><h3>{"Section Title"}</h3>
+        <Col md={6} sm={12}><img src='images/imgtex.png' /></Col>
+        <Col md={6} sm={12}><h3>{"Section Title"}</h3>
           <h2>
             {`Excepture sint occaecat cupidatat non proident,`}
             <br />
@@ -20,9 +20,13 @@ function Home() {
           </h2>
 
 
-          {
-            !user ? <span className="btn_dashboard">Please login to see your Dashboard</span> : <a href="/UserDashboard" className="btn_dashboard">Dashboard</a>
+          { user?
+           <a href="/UserDashboard" className="btn_dashboard">Dashboard</a>:
+           <a href="/UserDashboard" className="btn_dashboard">Login to see your Dashboard</a>
           }
+           <br/>
+
+         
         </Col>
       </div>
     </Row>

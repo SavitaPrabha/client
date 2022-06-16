@@ -5,6 +5,8 @@ import store from "store";
 import { Form, FormGroup, Input, Label, Button, } from 'reactstrap';
 import { postSubmitForm } from "../../FormHelper/Forms_helper"
 import { useNavigate } from 'react-router-dom';
+import { Col, Row } from 'react-bootstrap';
+import './sendotp.css';
 function Otp() {
     useEffect(() => {
         setUser(store.get("user1") ? store.get("user1") : null);
@@ -67,7 +69,7 @@ function Otp() {
                         name="pwd"
                         label="Password"
                         placeholder="Enter Password"
-                        type="text"
+                        type="password"
                         errorMessage="Password cannot be empty."
                         onChange={(e, v) => {
                             setpassword(e.target.value);
@@ -83,21 +85,24 @@ function Otp() {
                         }}
                     />
                 </FormGroup>
+                <Row>
+                
+                <Col md={6}>
                 <Button
                     type="submit"
-                    color="primary"
+                    
                     className="mr-1"
                 >
                     Submit
                 </Button>
+                </Col>
+                <Col md={6}>
+                <div className="userreg_btn"><a href='/UserLogin'>Register here</a></div>
+                </Col>
+                </Row>
+                
             </div>
-
-            <div>
-
-
-                <a href='/UserLogin'>Register here</a>
-            </div>
-        </Form>
+ </Form>
 
 
 

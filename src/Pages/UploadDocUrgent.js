@@ -67,27 +67,7 @@ const UploadDocForm = () => {
     setdoc(event.target.files[0]);
   };
 
-  const handleValidSubmit1 = async (e, v) => {
-    e.preventDefault();
-
-    let url ="https://pqs3b4u48k.execute-api.ap-south-1.amazonaws.com/prod/papers/insert";
-    srcToFile().then(function (file) {
-      let formData = new FormData();
-      formData.set("name_of_document", "");
-      formData.set("service_type", "");
-      formData.set("document_type", "Regular");
-      formData.set("tentative_pages", 1);
-      postSubmitForm_withformdata(url, formData).then((api_response) => {
-        if (api_response.status === 1 && api_response.data) {
-          console.log(api_response);
-          showNotification(api_response.message, "Success");
-        } else {
-          showNotification(api_response.message, "Error");
-        }
-      });
-    });
-  };
-
+ 
   const handleValidSubmit = async (e, v) => {
     e.preventDefault();
     let url =
@@ -101,7 +81,7 @@ const UploadDocForm = () => {
 
       formData.set("name_of_document", document);
       formData.set("service_type", serviceType);
-      formData.set("document_type", "Regular");
+      formData.set("document_type", "Urgent");
       formData.set("tentative_pages", uploadedpages);
       formData.append("document_file", file);
       postSubmitForm_withformdata(url, formData).then((api_response) => {
@@ -274,7 +254,9 @@ const UploadDocForm = () => {
         </form>
       </div>
       <div></div>
-      
+      {/* <p className="login_button">
+        Already Registered?<Link to="/UserReg">Login</Link>
+      </p> */}
     </>
   );
 };

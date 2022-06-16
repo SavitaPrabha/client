@@ -4,8 +4,8 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import UserLogin from '../../components/UserLogin';
 import Otp from './Otp';
 import UserReg from '../../components/UserReg';
-import './sendotp.css';
-class LoginRegisterPage extends React.Component {
+
+class StudentLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,13 +26,11 @@ class LoginRegisterPage extends React.Component {
   render() {
     return (
       <div>
-        <button className='log_btn'  onClick={this.toggle}>Login/Register</button>
+        <span  onClick={this.toggle}>Login/Register</span>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Registration</ModalHeader>
           <ModalBody>
-          {/* <UserReg/> */}
-           <Otp/> 
-          {/* <UserLogin/> */}
+          
           
           </ModalBody>
         </Modal>
@@ -41,4 +39,4 @@ class LoginRegisterPage extends React.Component {
   }
 }
 
-export default LoginRegisterPage;
+export default StudentLogin;

@@ -14,6 +14,10 @@ import SendOtp from "./Pages/FORMS/SendOtp";
 import LoginRegisterPage from "./Pages/FORMS/LoginRegisterPage";
 import UserDashboard from './Pages/UserDashboard';
 import Entry from "./Pages/FORMS/Entry";
+import FirstDraft from "./Pages/FirstDraft";
+import MyProfile from "./Pages/MyProfile";
+import UploadDocUrgent from "./Pages/UploadDocUrgent";
+import Forgot from "./components/Forgot";
 
 
 
@@ -62,7 +66,10 @@ function App() {
         <Route path="/LoginRegisterPage" element={<LoginRegisterPage/>}/>
         <Route path='/UserDashboard' element={<UserDashboard/>}/>
          <Route path="/Entry" element={<Entry/>}/>    
-              
+          <Route path ="/FirstDraft" element={<FirstDraft/>}/> 
+          <Route path="/MyProfile" element={<MyProfile/>}/>   
+            <Route path="/UploadDocUrgent" element={<UploadDocUrgent/>}/>
+            {/* <Route path="/Forgot" element={<Forgot/>}/> */}
 
       </Routes>
       <Footer/>

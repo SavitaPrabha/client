@@ -20,14 +20,14 @@
     margin-top: 10px;
     cursor: pointer;
     font-size: 15px;
-    background: #01d28e;
-    border: 1px solid #01d28e;
+    background: #dd1338;
+    border: 1px solid #dd1338;
     color: #fff;
     padding: 10px 20px;
   }
   
   input[type="submit"]:hover {
-    background: #6cf0c2;
+    background: #dd1338;
   }
   
   .button-container {
@@ -46,7 +46,7 @@
   }
   
   .error {
-    color: red;
+    color: #dd1338;
     font-size: 12px;
   }
   
@@ -61,3 +61,10 @@
     gap: 8px;
     margin: 10px;
   }
+.form-group{
+  text-align: initial;
+  text-transform: capitalize;
+  color: #dd1338;
+  padding: 8px;
+  font-weight: 600;
+}

@@ -7,3 +7,30 @@
 .verify{
     margin: 20px;
 }
+.userreg_btn{
+    border: 1px solid #b6adad;
+    padding: 8px;
+    text-align: center;
+    border-radius: 8px;
+    background: #dd1338;
+}
+.userreg_btn a{
+    color: #fff;
+    font-size: 18px;
+}
+.userreg_btn a:hover{
+    color: #fff;
+}
+.log_btn {
+  
+    border:none;
+    background: #dc3545;
+    color: #fff;
+    font-weight: 600;
+    padding: -7px;
+}
+.log_btn:hover{
+    border: 1px solid #fff;
+    border-radius: 8px;
+    transform: scale(1.1);
+}

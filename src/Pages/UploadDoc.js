@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import UploadDocForm from "./UploadDocForm";
+import UploadDocUrgent from "./UploadDocUrgent";
 
 class UploadDoc extends React.Component {
   constructor(props) {
@@ -9,11 +10,13 @@ class UploadDoc extends React.Component {
     this.state = {
       modal: false,
       nestedModal: false,
+      nestedModal1: false,
       closeAll: false,
     };
 
     this.toggle = this.toggle.bind(this);
     this.toggleNested = this.toggleNested.bind(this);
+    this.toggleNested1 = this.toggleNested1.bind(this);
     this.toggleAll = this.toggleAll.bind(this);
   }
 
@@ -26,6 +29,12 @@ class UploadDoc extends React.Component {
   toggleNested() {
     this.setState({
       nestedModal: !this.state.nestedModal,
+      closeAll: false,
+    });
+  }
+  toggleNested1() {
+    this.setState({
+      nestedModal1: !this.state.nestedModal1,
       closeAll: false,
     });
   }
@@ -52,9 +61,8 @@ class UploadDoc extends React.Component {
           <ModalBody>
             <Row>
               <Col md={6}>
-                <Card style={{ width: "14rem", backgroundColor:'#631120' }}>
-                  <Card.Body>
-
+                <Card style={{ width: "14rem",  backgroundColor: 'rgb(220 53 69)' }}>
+                  <Card.Body style={{background:"#fff"}}>
                     <Card.Title>Regular</Card.Title>
                     <Card.Text>{`Delivery in 5 - 7 business days.`}</Card.Text>
                     <Button color="secondary" onClick={this.toggleNested}>
@@ -64,46 +72,42 @@ class UploadDoc extends React.Component {
                 </Card>
               </Col>
               <Col md={6}>
-                <Card style={{ width: "14rem",backgroundColor:'#631120' }}>
-                  <Card.Body>
+                <Card style={{ width: "14rem",  backgroundColor: 'rgb(220 53 69)' }}>
+                  <Card.Body  style={{background:"#fff"}}>
                     <Card.Title>{`Urgent`}</Card.Title>
                     <Card.Text>{`Delivery in 2 - 4 business days.`}</Card.Text>
-                    <Button color="secondary" onClick={this.toggleNested}>
+                    <Button color="secondary" onClick={this.toggleNested1}>
                       {`Select`}
                     </Button>
                   </Card.Body>
                 </Card>
               </Col>
+              
             </Row>
             <br />
-            {/* <Button color="success" onClick={this.toggleNested}>
-              Show Nested Modal
-            </Button> */}
+            
             <Modal
               isOpen={this.state.nestedModal}
               toggle={this.toggleNested}
               onClosed={this.state.closeAll ? this.toggle : undefined}
             >
-              <ModalHeader><h4>{`Upload Document`}</h4></ModalHeader>
-              <ModalBody><UploadDocForm/></ModalBody>
-              <ModalFooter>
-                {/* <Button color="primary" onClick={this.toggleNested}>
-                  Done
-                </Button>{" "}
-                <Button color="secondary" onClick={this.toggleAll}>
-                  All Done
-                </Button> */}
-              </ModalFooter>
+              <ModalHeader><h4>{`Upload Document(Regular)`}</h4></ModalHeader>
+              <ModalBody><UploadDocForm /></ModalBody>
+           
+              
+            </Modal>
+            <Modal
+              isOpen={this.state.nestedModal1}
+              toggle={this.toggleNested1}
+              onClosed={this.state.closeAll ? this.toggle : undefined}
+            >
+              <ModalHeader><h4>{`Upload Document(Urgent)`}</h4></ModalHeader>
+              <ModalBody><UploadDocUrgent /></ModalBody>
+           
+              
             </Modal>
           </ModalBody>
-          <ModalFooter>
-            {/* <Button color="primary" onClick={this.toggle}>
-              Do Something
-            </Button>{" "}
-            <Button color="secondary" onClick={this.toggle}>
-              Cancel
-            </Button> */}
-          </ModalFooter>
+          
         </Modal>
       </div>
     );

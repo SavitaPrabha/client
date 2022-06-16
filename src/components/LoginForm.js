@@ -52,7 +52,7 @@ const LoginForm = () => {
           <div className='form-inner'>
 
             <FormGroup className='form-group'>
-              <Label for="Email">Username</Label>
+              <Label for="Email">User Name</Label>
               <Input
                 name="username"
                 label="Username"
@@ -74,12 +74,12 @@ const LoginForm = () => {
               />
             </FormGroup>
             <FormGroup className='form-group'>
-
+            <Label for="Email">Password</Label>
               <Input
                 name="pwd"
                 label="Password"
                 placeholder="Enter Password"
-                type="text"
+                type="password"
                 errorMessage="Password cannot be empty."
                 onChange={(e, v) => {
                   setpassword(e.target.value);
@@ -95,15 +95,15 @@ const LoginForm = () => {
                 }}
               />
             </FormGroup>
-            <Button
+            <Button 
               type="submit"
-              color="primary"
               className="mr-1"
             >
               Submit
             </Button>
           </div>
         </Form>
+        
       </div>
     </div>
   )
